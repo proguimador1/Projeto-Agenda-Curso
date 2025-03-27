@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     class Meta:
@@ -22,6 +23,11 @@ class Contact(models.Model):
     category = models.ForeignKey(
         Category, 
         on_delete=models.SET_NULL,
+        blank=True,null=True
+        )
+    owner = models.ForeignKey(
+        User, 
+        on_delete=models.CASCADE,
         blank=True,null=True
         )
 
