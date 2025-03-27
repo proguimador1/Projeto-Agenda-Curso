@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Contact
+from . import models
 
-@admin.register(Contact)
+@admin.register(models.Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = 'id', 'first_name', 'last_name', 'phone',
     ordering = 'first_name', 'last_name',
@@ -9,3 +9,8 @@ class ContactAdmin(admin.ModelAdmin):
     list_per_page = 20
     list_editable = 'phone',
     list_display_links = 'id', 'first_name', 'last_name',
+
+@admin.register(models.Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = 'name',
+    ordering = 'id',
