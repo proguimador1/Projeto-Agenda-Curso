@@ -44,5 +44,6 @@ def search(request):
             {
                 'contacts': contacts,
                 'site_title': 'Agenda',
+                'search_value': search_value,
             }
         )
