@@ -8,7 +8,8 @@ def home(request):
             request,
             'contact/index.html',
             {
-                'contacts': contacts
+                'contacts': contacts,
+                'site_title': 'Agenda',
             }
         )
 
@@ -18,7 +19,8 @@ def contact(request, contact_id):
             request,
             'contact/contact.html',
             {
-                'contact': single_contact
+                'contact': single_contact,
+                'site_title': single_contact.__str__,
             }
         )
 
@@ -40,6 +42,7 @@ def search(request):
             request,
             'contact/index.html',
             {
-                'contacts': contacts
+                'contacts': contacts,
+                'site_title': 'Agenda',
             }
         )
