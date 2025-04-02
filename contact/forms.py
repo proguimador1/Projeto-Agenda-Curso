@@ -66,3 +66,15 @@ class ContactForm(forms.ModelForm):
 
         return last_name
     
+    def clean_phone(self):
+        phone = self.cleaned_data["phone"]
+        
+        if len(phone) < 11:
+            raise ValidationError(
+                "Plase, enter a valid phone number",
+                code='invalid'
+            )
+
+        return phone
+    
+    
