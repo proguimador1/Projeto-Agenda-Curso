@@ -2,6 +2,13 @@ from django import forms
 from django.core.exceptions import ValidationError
 from contact.models import Contact
 
+def number_in_name_validation(name):
+    if any(c.isdigit() for c in name):
+            raise ValidationError(
+                'Name cannot contain numbers',
+                code='invalid'
+                )
+
 class ContactForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -31,12 +38,31 @@ class ContactForm(forms.ModelForm):
     def clean(self):
         cleaned_data = self.cleaned_data
 
-        self.add_error(
-            'first_name',
-            ValidationError(
-                'Error message',
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
+
+        if first_name == last_name:
+            msg = ValidationError(
+                "First and last name cannot be the same",
                 code='invalid'
             )
-        )
+
+            self.add_error('first_name', msg)
+            self.add_error('last_name', msg)
 
         return super().clean()
+    
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+
+        number_in_name_validation(first_name)
+
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+
+        number_in_name_validation(last_name)
+
+        return last_name
+    
