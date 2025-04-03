@@ -14,7 +14,24 @@
         <p><b>Created date: </b>{{contact.created_date}}</p>
         <p><b>Category: </b>{{contact.category.name}}</p>
         <p><b>Description: </b>{{contact.description}}</p>
+
     </div>
 
-    <a href="{% url "update" contact.id%}">UPDATE</a>
+    <div class='redirect-button'>
+        <a href="{% url "update" contact.id%}" 
+        class="">
+            <button id="update-button">
+                Edit
+            </button>
+        </a>
+
+        <a href="#" 
+        class="">
+            <button id="delete-button">
+                Delete
+            </button>
+        </a>
+    </div>
+    
+    
 {% endblock content %}

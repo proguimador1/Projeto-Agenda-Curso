@@ -312,3 +312,43 @@
     filter: brightness(80%);
     box-shadow: 0 0 5px var(--link-dark-color);
   }
+
+.redirect-button{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 5rem;
+}
+
+.redirect-button a{
+  text-decoration: none;
+}
+
+.redirect-button a:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.redirect-button button{
+  width: 7rem;
+  height: 4rem;
+  color: white;
+  border-radius: 5px;
+  text-decoration: inherit;
+  cursor: inherit;
+}
+
+#update-button{
+  background-color: rgb(45, 179, 194);
+}
+
+#update-button:hover{
+  background-color: rgb(55, 44, 171);
+}
+
+#delete-button{
+  background-color: rgb(231, 41, 41);
+}
+#delete-button:hover{
+  background-color: rgb(146, 50, 50);
+}
