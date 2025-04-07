@@ -50,7 +50,7 @@ def update(request, contact_id):
             {
                 'form': form,
                 'form_action': form_action,
-                'site_title': 'Create contact',
+                'site_title': 'New contact',
             }
         )
 
@@ -63,3 +63,22 @@ def update(request, contact_id):
                 'site_title': 'Create contact',
             }
         )
+
+def delete(request, contact_id):
+    contact = get_object_or_404(Contact, id=contact_id) 
+
+    confirmation = request.POST.get('confirmation', 'no')
+
+    if confirmation == 'yes':
+        contact.delete()
+        return redirect('home')
+
+    return render(
+        request,
+        'contact/contact.html',
+        {
+            'contact': contact,
+            'site_title': contact.__str__,
+            'confirmation': confirmation,
+        }
+    )

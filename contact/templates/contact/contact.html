@@ -25,13 +25,19 @@
             </button>
         </a>
 
-        <a href="#" 
-        class="">
-            <button id="delete-button">
-                Delete
-            </button>
-        </a>
+        <form action="{% url "delete" contact.id%}" method="POST">
+            {% csrf_token %}
+            {% if confirmation == 'no' %}
+                <input type="hidden" name="confirmation" value="yes">
+                <button id="delete-button" type="submit">
+                    Are you sure?
+                </button>
+            {% else %}
+                <button id="delete-button" type="submit">
+                    Delete
+                </button>
+            {% endif %}
+        </form>
     </div>
-    
     
 {% endblock content %}
