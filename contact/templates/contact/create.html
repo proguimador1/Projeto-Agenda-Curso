@@ -9,7 +9,7 @@
         <h2>Contact</h2>
 
         <form 
-        action="{{forma_action}}"
+        action="{{form_action}}"
         method="POST"
         enctype="multipart/form-data"
         >
@@ -20,12 +20,22 @@
             {% for field in form %}
                 <div class="form-group">
         
-                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                    <label for="{{field.id_for_label}}">{{field.label}}</label>
 
-                {{field}}
-                {{field.errors}}
+                    {{field}}
+                    {{field.errors}}
+
+                    
         
                 </div>
+
+                {% if field.name == 'picture' and field.value.url%}
+                    <div class="form-group">
+                        <img src="{{field.value.url}}" 
+                        alt="">
+                    </div>
+                {% endif %}
+
             {% endfor %}
 
         </div>

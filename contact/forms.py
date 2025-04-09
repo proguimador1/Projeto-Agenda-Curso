@@ -10,6 +10,7 @@ def number_in_name_validation(name):
                 )
 
 class ContactForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -29,6 +30,14 @@ class ContactForm(forms.ModelForm):
             'placeholder': 'A short description of the contact',
             'style': 'max-height: 10rem;max-width: 80rem;resize: none'
         })
+
+        self.fields['picture'] = forms.ImageField(
+            widget=forms.FileInput(
+               attrs={
+                  'accept': 'image/*',
+             }
+            )
+        )
 
     class Meta:
         model = Contact

@@ -7,7 +7,7 @@ def create(request):
     form_action = reverse('create')
 
     if request.method == 'POST':
-        form = ContactForm(data=request.POST)
+        form = ContactForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
@@ -38,7 +38,7 @@ def update(request, contact_id):
     contact = get_object_or_404(Contact, id=contact_id)
 
     if request.method == 'POST':
-        form = ContactForm(data=request.POST, instance=contact)
+        form = ContactForm(request.POST, request.FILES, instance=contact)
 
         if form.is_valid():
             form.save()
@@ -50,7 +50,7 @@ def update(request, contact_id):
             {
                 'form': form,
                 'form_action': form_action,
-                'site_title': 'New contact',
+                'site_title': 'Edit contact',
             }
         )
 
@@ -60,7 +60,7 @@ def update(request, contact_id):
             {
                 'form': ContactForm(instance=contact),
                 'form_action': form_action,
-                'site_title': 'Create contact',
+                'site_title': 'Edit contact',
             }
         )
 
