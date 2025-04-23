@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from contact.models import Contact
+from django.contrib.auth.forms import UserCreationForm
 
 def number_in_name_validation(name):
     if any(c.isdigit() for c in name):
@@ -86,4 +87,5 @@ class ContactForm(forms.ModelForm):
 
         return phone
     
-    
+class RegisterForm(UserCreationForm):
+    ...
