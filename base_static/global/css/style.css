@@ -324,22 +324,20 @@
   text-decoration: none;
 }
 
-.redirect-button a:hover{
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .redirect-button button{
   width: 7rem;
   height: 4rem;
   color: white;
   border-radius: 5px;
-  text-decoration: inherit;
-  cursor: inherit;
+}
+
+.redirect-button button:hover{
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #update-button{
-  background-color: rgb(45, 179, 194);
+  background-color: rgb(45, 132, 194);
 }
 
 #update-button:hover{
