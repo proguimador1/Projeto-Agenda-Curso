@@ -25,26 +25,28 @@
     </div>
 
     <div class='redirect-button'>
-        <a href="{% url "update" contact.id%}" 
-        class="">
-            <button id="update-button">
-                Edit
-            </button>
-        </a>
+        {% if contact.owner == user %}
+            <a href="{% url "update" contact.id%}" 
+            class="">
+                <button id="update-button">
+                    Edit
+                </button>
+            </a>
 
-        <form action="{% url "delete" contact.id%}" method="POST">
-            {% csrf_token %}
-            {% if confirmation == 'no' %}
-                <input type="hidden" name="confirmation" value="yes">
-                <button id="delete-button" type="submit">
-                    Are you sure?
-                </button>
-            {% else %}
-                <button id="delete-button" type="submit">
-                    Delete
-                </button>
-            {% endif %}
-        </form>
+            <form action="{% url "delete" contact.id%}" method="POST">
+                {% csrf_token %}
+                {% if confirmation == 'no' %}
+                    <input type="hidden" name="confirmation" value="yes">
+                    <button id="delete-button" type="submit">
+                        Are you sure?
+                    </button>
+                {% else %}
+                    <button id="delete-button" type="submit">
+                        Delete
+                    </button>
+                {% endif %}
+            </form>
+        {% endif %}
     </div>
     
 {% endblock content %}
