@@ -12,7 +12,9 @@ def create(request):
         form = ContactForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.save()
+            contact = form.save(commit=False)
+            contact.owner = request.user
+            contact.save()
             return redirect('home')
 
         return render(
@@ -38,7 +40,10 @@ def create(request):
 @login_required(login_url='login')
 def update(request, contact_id):
     form_action = reverse('update', args=(contact_id,))
-    contact = get_object_or_404(Contact, id=contact_id)
+    contact = get_object_or_404(
+                Contact, 
+                id=contact_id,
+                owner = request.user)
 
     if request.method == 'POST':
         form = ContactForm(request.POST, request.FILES, instance=contact)
