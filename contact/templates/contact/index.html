@@ -3,7 +3,7 @@
 {% block title %}{{site_title}}{% endblock title %}
 
 {% block content %}
-    {% if page_obj %}
+    {% if page_obj and user.is_authenticated %}
         <div class="responsive-table">
             <table class="contacts-table">
                 <caption class="table-caption">
@@ -22,51 +22,55 @@
                     {% for contact in page_obj %}
                         <tr class="table-row">
                             <td class="table-cel">
-                                <a 
-                                    href="{% url "contact" contact.id %}" 
-                                    class="table-link"
-                                >
-                                    {{contact.id}}
+                                <a href="{% url "contact" contact.id %}" class="table-link">
+                                    {{ contact.id }}
                                 </a>
-                                </td>
-                                <td class="table-cel">
-                                    {{contact.first_name}}
                             </td>
                             <td class="table-cel">
-                                {{contact.last_name}}
+                                {{ contact.first_name }}
                             </td>
                             <td class="table-cel">
-                                {{contact.phone}}
+                                {{ contact.last_name }}
                             </td>
                             <td class="table-cel">
-                                {{contact.email}}
+                                {{ contact.phone }}
+                            </td>
+                            <td class="table-cel">
+                                {{ contact.email }}
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+
             <div class="pagination">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
-                        <a href="?page=1&q={{search_value}}">&laquo; first</a>
-                        <a href="?page={{ page_obj.previous_page_number }}&q={{search_value}}">previous</a>
+                        <a href="?page=1&q={{ search_value }}">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}&q={{ search_value }}">previous</a>
                     {% endif %}
-            
+
                     <span class="current">
                         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                     </span>
-            
+
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}&q={{search_value}}">next</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}&q={{search_value}}">last &raquo;</a>
+                        <a href="?page={{ page_obj.next_page_number }}&q={{ search_value }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}&q={{ search_value }}">last &raquo;</a>
                     {% endif %}
                 </span>
             </div>
         </div>
+    {% elif user.is_authenticated %}
+        <div class="single-contact">
+            <h1 class="single-contact-name">
+                No contacts found. Add new contacts.
+            </h1>
+        </div>
     {% else %}
         <div class="single-contact">
             <h1 class="single-contact-name">
-                No contacts found.
+                No contacts found. Please, do login or register.
             </h1>
         </div>
     {% endif %}
