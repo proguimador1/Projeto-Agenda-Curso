@@ -4,13 +4,13 @@ from django.db.models import Q
 from contact.models import Contact
 
 def home(request):
+    page_obj = None
+    
     if request.user.is_authenticated:
         contacts = Contact.objects.filter(show=True).filter(owner=request.user).order_by('-id')
-        paginator = Paginator(contacts, 20)
+        paginator = Paginator(contacts, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-    else:
-        page_obj = None
 
     return render(
             request,
